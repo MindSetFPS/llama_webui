@@ -44,6 +44,10 @@ form.addEventListener('submit', function(e) {
   e.preventDefault();
   if (input.value) {
     socket.emit('message', input.value);
+    var item = document.createElement('li')
+    item.className = 'user bg-green-300'
+    item.textContent = input.value
+    responses.appendChild(item)
     input.value = '';
   }
 });

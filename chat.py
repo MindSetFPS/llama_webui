@@ -7,20 +7,21 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 def generate_text(
+    e,
     prompt: str,
     temperature: float = 0.8,
     top_p: float = 0.95,
     max_seq_len: int = 10
 ):
     results = generator.generate(
-        prompt, max_gen_len=max_seq_len, temperature=temperature, top_p=top_p
+            prompt, e, max_gen_len=max_seq_len, temperature=temperature, top_p=top_p
     )
 
     for result in results:
         print("\n==================================\n")
         print(result)
         print("\n==================================\n")
-        emit('response', result)
+        e('response', result)
 
 print('listening')
 @app.route('/', methods=['get'])
@@ -37,9 +38,9 @@ def test_disconnect():
 
 @socketio.on('message')
 def handle_message(message):
+    emit('response', message)
     print('Received message: ' + message)
-    generate_text(prompt=[message])
-    emit('response', 'Server received message: ' + message)
+    generate_text(e=emit, prompt=[message])
 
 @app.route('/', methods=['POST'])
 def post_handler():

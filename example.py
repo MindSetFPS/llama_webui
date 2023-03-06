@@ -10,7 +10,8 @@ import time
 import json
 import pyarrow as pa
 from pathlib import Path
-from llama import ModelArgs, Transformer, Tokenizer, LLaMA
+from llama import ModelArgs, Transformer, Tokenizer
+from generate_single_prompt import LLaMA
 
 def load(
     ckpt_dir: str,
