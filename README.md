@@ -1,3 +1,20 @@
+Simple web server to test facebook's LLaMa model.
+
+## Running
+
+```bash
+flask --app chat.py run --host=0.0.0.0
+```
+
+## BUGS
+
+### IMPORTANT
+The `--debug` option creates another instance of the load() function of LLaMa, which nukes your ram and vram. Run the server without it.
+
+It does not send text while generating.
+
+If it is generating text and another request comes in, it does not stop the previous and generates bot requests at the same time.
+
 # LLaMA 
 
 This repository is intended as a minimal, hackable and readable example to load [LLaMA](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/) ([arXiv](https://arxiv.org/abs/2302.13971v1)) models and run inference.
